@@ -1,0 +1,60 @@
+.sidebar {
+  top: 50px;
+  z-index: 10;
+  width: 100px;
+  height: 100%;
+  position: fixed;
+  transition: 0.2s;
+  background-color: #202020;
+  box-shadow: 1px 7px 10px rgba(0, 0, 0, 0.2);
+}
+
+.treeview {
+  display: flex;
+  text-align: center;
+  padding: 15px 0 15px 0;
+  justify-content: center;
+
+  border-top: 1px solid #3e3e3e;
+  border-bottom: 1px solid #3e3e3e;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #3e3e3e;
+  }
+}
+
+.sidebar-menu {
+  display: inline;
+}
+
+a .fas {
+  padding: 10px;
+}
+
+.sub-open {
+  display: none;
+  position: absolute;
+  background-color: #202020;
+  left: 100px;
+  margin-top: -16px;
+  padding: 0;
+}
+
+.sub-option {
+  padding: 10px 40px 10px 40px;
+}
+
+.open-sub {
+  display: block;
+}
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+
+  .sidebar-open {
+    display: block;
+  }
+}

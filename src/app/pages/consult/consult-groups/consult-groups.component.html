@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Consultar Grupos</h4>
+            <span [routerLink]="'/register-group'" class="new"><i class="fas fa-file fa-lg"></i></span>
+            <input type="text" id="inputSearch" class="input-header" (keyup)="searchGroup()" placeholder="Buscar grupo...">
+        </div>
+
+        <table id="tableGroup">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th class="align-icons">Ação</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Teste 1</td>
+                    <td>Ativo</td>
+                    <td class="align-icons">
+                        <span [routerLink]="'/register-group'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
+                        <span (click)="openConfirm()"><i class="fas fa-trash"></i></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Test 2</td>
+                    <td>Ativo</td>
+                    <td class="align-icons">
+                        <span [routerLink]="'/register-group'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
+                        <span (click)="openConfirm()"><i class="fas fa-trash"></i></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Teste 3</td>
+                    <td>Ativo</td>
+                    <td class="align-icons">
+                        <span [routerLink]="'/register-group'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
+                        <span (click)="openConfirm()"><i class="fas fa-trash"></i></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

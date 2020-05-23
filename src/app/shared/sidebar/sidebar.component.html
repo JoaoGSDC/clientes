@@ -1,0 +1,47 @@
+<section class="sidebar">
+
+  <ul class="sidebar-menu scroll" data-widget="tree">
+
+    <li (mouseover)="openSubMenu(0)" (mouseout)="closeSubMenu(0)" class="treeview">
+      <a class="btn-sidebar" href="#">
+        <i class="fas fa-user-plus"></i>
+        <span>Cadastro</span>
+      </a>
+      <ul class="sub-open">
+        <a routerLink="/register-group" routerLinkActive="active">
+          <li class="treeview sub-option">
+            <span>Grupo</span>
+          </li>
+        </a>
+        <a routerLink="/register-client" routerLinkActive="active">
+          <li class="treeview sub-option">
+            <span>Cliente</span>
+          </li>
+        </a>
+      </ul>
+    </li>
+
+    <li (mouseover)="openSubMenu(1)" (mouseout)="closeSubMenu(1)" class="treeview" routerLink="consult">
+      <a class="btn-sidebar" href="consult">
+        <i class="fas fa-users"></i>
+        <span>Consulta</span>
+      </a>
+      <ul class="sub-open">
+        <a routerLink="/consult-groups" routerLinkActive="active">
+          <li class="treeview sub-option">
+            <span>Grupos</span>
+          </li>
+        </a>
+        <a routerLink="/consult-clients" routerLinkActive="active">
+          <li class="treeview sub-option">
+            <span>Clientes</span>
+          </li>
+        </a>
+      </ul>
+    </li>
+
+  </ul>
+
+</section>
+
+<div class="modal-sidebar" (click)="closeSidebar()"></div>

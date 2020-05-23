@@ -1,0 +1,16 @@
+.input-header {
+    width: 25%;
+    right: 60px;
+    position: absolute;
+}
+
+.new {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    
+    &:hover {
+      transition: 0.3s;
+      color: #144883
+    }
+}

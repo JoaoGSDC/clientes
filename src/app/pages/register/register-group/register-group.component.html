@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Cadastrar Grupo</h4>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="col-12 col-md-4">
+                <label>Nome</label>
+                <input type="text" formControlName="name" />
+            </div>
+
+            <div class="col-12 col-md-2">
+                <label>Status</label>
+                <select formControlName="status">
+                    <option>Ativo</option>
+                    <option>Desabilitado</option>
+                </select>
+            </div>
+
+            <div class="form-footer">
+                <button class="btn-form btn-salvar">Salvar</button>
+                <button [routerLink]="'/consult-groups'" type="button" class="btn-form btn-voltar">Voltar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

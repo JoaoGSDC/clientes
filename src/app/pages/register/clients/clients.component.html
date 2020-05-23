@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Cadastrar Cliente</h4>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="col-12 col-md-4">
+                <label>Nome</label>
+                <input type="text" formControlName="name" />
+            </div>
+
+            <div class="col-12 col-md-2">
+                <label>Tipo</label>
+                <select #type (click)="typePerson(type.value)" formControlName="type">
+                    <option selected>Física</option>
+                    <option>Jurídica</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label>{{ cpf }}</label>
+                <input type="text" formControlName="cpf" />
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label>{{ rg }}</label>
+                <input type="text" formControlName="rg" />
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label>Data de Cadastro</label>
+                <input type="date" formControlName="date" />
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label>Grupo</label>
+                <select formControlName="group">
+                    <option hidden selected></option>
+                    <option>Teste1</option>
+                    <option>Teste2</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label>Status</label>
+                <select formControlName="status">
+                    <option hidden selected></option>
+                    <option>Ativo</option>
+                    <option>Desabilitado</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label>Telefone</label>
+                <select (click)="openSelect = !openSelect ? true : false;" formControlName="tel"></select>
+                <div class="option" *ngIf="openSelect">
+                    <div class="option-detail" style="display: flex;">
+                        <input type="text" style="margin-top: 10px;" />
+                        <button class="btn-option">+</button>
+                    </div>
+                    <div class="option-detail">19987070276 <span class="btn-trash"><i class="fas fa-trash"></i></span>
+                    </div>
+                    <div class="option-detail">19988990424 <span class="btn-trash"><i class="fas fa-trash"></i></span>
+                    </div>
+                    <div class="option-detail">19981626239 <span class="btn-trash"><i class="fas fa-trash"></i></span>
+                    </div>
+                </div>
+
+                <div class="modal"></div>
+            </div>
+
+            <div class="form-footer">
+                <button class="btn-form btn-salvar">Salvar</button>
+                <button [routerLink]="'/consult-clients'" type="button" class="btn-form btn-voltar">Voltar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

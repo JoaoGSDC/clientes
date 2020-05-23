@@ -1,0 +1,231 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+body {
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  background-color: #181818;
+}
+
+.card {
+  z-index: 2;
+  flex-grow: 1;
+  margin: 10px 0 0 0;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background-color: #202020;
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  max-width: calc(100% - 100px);
+  margin-left: 100px;
+  margin-top: 15px;
+}
+
+.components {
+  padding: 0 10px 0 10px;
+  color: #ffffff;
+  width: 100%;
+  display: flex;
+  border-radius: 3px;
+  border: 1px solid #303030;
+  height: 35px;
+  margin-bottom: 15px;
+  margin-top: -5px;
+}
+
+input {
+  @extend .components;
+  background-color: #121212;
+}
+
+select {
+  @extend .components;
+  background-color: #3e3e3e !important;
+}
+
+option {
+  background-color: #121212;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-sidebar {
+  display: grid;
+}
+
+.btn-sidebar-open {
+  display: initial;
+}
+
+.logo-mini {
+  height: 40px;
+  padding-top: 5px;
+  margin-left: 115px;
+  filter: grayscale(30%);
+}
+
+.sidebar-open {
+  overflow: auto;
+  transition: 0.3s !important;
+  width: 200px !important;
+}
+
+.background-modal {
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.form-footer {
+  margin-top: 30px;
+  margin-left: 60px;
+  width: calc(100% - 75px);
+  bottom: 60px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.btn-form {
+  height: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn-salvar {
+  color: #ffffff;
+  background-color: #144883;
+
+  &:hover {
+    font-size: 16px;
+    transition: 0.3s;
+    background-color: #10345e;
+  }
+}
+
+.btn-voltar {
+  margin-left: 0;
+  color: #ffffff;
+  background-color: transparent;
+  border-color: #144883;
+  position: absolute;
+  left: 35px;
+
+  &:hover {
+    font-size: 16px;
+    transition: 0.3s;
+    color: #144883;
+  }
+}
+
+.card-header {
+  display: flex;
+  margin-left: -20px;
+  margin-top: -20px;
+  margin-right: -20px;
+  margin-bottom: 20px;
+  padding: 20px 0px 10px 35px;
+  background-color: #3e3e3e;
+}
+
+.init-img {
+  height: 100px;
+  filter: grayscale(100%);
+  opacity: 0.1;
+  margin-left: 40%;
+  margin-top: 15%;
+  position: absolute;
+  z-index: -1;
+}
+
+tbody {
+  tr:nth-child(odd) {
+    background: #3e3e3e;
+  }
+}
+
+table {
+  td {
+    padding: 12px 0px 12px 15px;
+  }
+
+  th {
+    @extend td;
+  }
+
+  span {
+    cursor: pointer;
+    
+    &:hover {
+      transition: 0.3s;
+      color: #144883
+    }
+  }
+}
+
+.align-icons {
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #144883;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #10345e;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    position: fixed !important;
+  }
+
+  .container {
+    margin-left: 0;
+    max-width: 100%;
+    margin-top: 50px;
+    position: absolute;
+  }
+}
