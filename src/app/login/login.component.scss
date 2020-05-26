@@ -1,0 +1,86 @@
+form {
+    display: inherit;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+
+    h2 {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+
+    .inputBox {
+        position: relative;
+
+        input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 18px;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+
+            &:focus,
+            &:valid {
+                top: -18px;
+                left: 0;
+                color: #ffffff;
+                font-size: 14px;
+            }
+
+            &:valid ~ label {
+                top: -18px;
+                left: 0;
+                color: #03a9f4;
+                font-size: 14px;
+            }
+        }
+
+        label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            letter-spacing: 1px;
+            padding: 10px 0;
+            font-size: 18px;
+            color: #fff;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+    }
+
+    button {
+        width: 100%;
+        height: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 5px;
+        border: 1px solid #e0e0e0;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        color: #ffffff;
+        background-color: #144883;
+
+        &:hover {
+            font-size: 18px;
+            transition: 0.3s;
+            background-color: #10345e;
+        }
+    }
+}

@@ -5,11 +5,14 @@ import { ClientsComponent } from './pages/register/clients/clients.component';
 import { RegisterGroupComponent } from './pages/register/register-group/register-group.component';
 import { ConsultGroupsComponent } from './pages/consult/consult-groups/consult-groups.component';
 import { ConsultClientsComponent } from './pages/consult/consult-clients/consult-clients.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: 'register-client',
@@ -28,6 +31,10 @@ const routes: Routes = [
         component: ConsultGroupsComponent
       }
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 
 ];
