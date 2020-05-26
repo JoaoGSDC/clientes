@@ -3,7 +3,7 @@
 
         <div class="card-header">
             <h4>Consultar Clientes</h4>
-            <span [routerLink]="'/register-client'" class="new"><i class="fas fa-file fa-lg"></i></span>
+            <span routerLink="/register-client" class="new"><i class="fas fa-file fa-lg"></i></span>
             <input type="text" id="inputSearch" class="input-header" (keyup)="searchClients()" placeholder="Buscar cliente...">
         </div>
 
@@ -16,31 +16,17 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody *ngFor="let oClient of clients; let i = index;">
                 <tr>
-                    <td>Teste 1</td>
-                    <td>Ativo</td>
+                    <td>{{ oClient.name }}</td>
+                    <td>{{ oClient.status }}</td>
                     <td class="align-icons">
-                        <span [routerLink]="'/register-client'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
-                        <span><i class="fas fa-trash"></i></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Teste 2</td>
-                    <td>Ativo</td>
-                    <td class="align-icons">
-                        <span [routerLink]="'/register-client'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
-                        <span><i class="fas fa-trash"></i></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Teste 3</td>
-                    <td>Ativo</td>
-                    <td class="align-icons">
-                        <span [routerLink]="'/register-client'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
-                        <span><i class="fas fa-trash"></i></span>
+                        <a routerLink="/register-client">
+                            <span (click)="storageGroup(oClient)" style="margin-right: 25px;">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                        </a>
+                        <span (click)="openConfirm(oClient)"><i class="fas fa-trash"></i></span>
                     </td>
                 </tr>
             </tbody>

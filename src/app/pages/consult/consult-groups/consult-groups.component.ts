@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GroupsService } from 'src/services/groups.service';
+import { Group } from 'src/app/interfaces/group';
 
 @Component({
   selector: 'app-consult-groups',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultGroupsComponent implements OnInit {
 
-  constructor() { }
+  groups!: Group[];
+
+  constructor(private groupService: GroupsService) { }
 
   ngOnInit(): void {
+    this.groupService.getGroups().subscribe((groups: Group[]) => {
+      this.groups = groups;
+    });
   }
 
   searchGroup(): void {
@@ -32,14 +39,22 @@ export class ConsultGroupsComponent implements OnInit {
     }
   }
 
-  openConfirm(): void {
+  openConfirm(iGroup: Group): void {
     if (confirm('Deseja realmente excluir este grupo?')) {
-      this.deleteGroup();
+      this.deleteGroup(iGroup);
     }
   }
 
-  deleteGroup(): void {
-    console.log('Em construção');
+  storageGroup(iGroup: Group): void {
+    localStorage.setItem('group', JSON.stringify(iGroup));
+  }
+
+  deleteGroup(iGroup: Group): void {
+    this.groupService.delGroup(iGroup.id).subscribe(res => {
+      alert('Deletado com sucesso!');
+
+      this.groups.splice(this.groups.indexOf(iGroup), 1);
+    });
   }
 
 }

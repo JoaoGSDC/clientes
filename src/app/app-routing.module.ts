@@ -18,19 +18,19 @@ const routes: Routes = [
       {
         path: 'register-group',
         component: RegisterGroupComponent
-      }
-      ,
+      },
       {
         path: 'consult-clients',
         component: ConsultClientsComponent
-      }
-      ,
+      },
       {
         path: 'consult-groups',
         component: ConsultGroupsComponent
       }
     ]
-  }];
+  }
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

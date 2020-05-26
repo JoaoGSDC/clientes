@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Analytics';
+  title = 'Clients';
+
+  showMenu: boolean = false;
+
+  constructor() {
+
+  }
+
+  ngOnInit(): void {
+  }
 }

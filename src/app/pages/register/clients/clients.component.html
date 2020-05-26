@@ -39,8 +39,7 @@
                 <label>Grupo</label>
                 <select formControlName="group">
                     <option hidden selected></option>
-                    <option>Teste1</option>
-                    <option>Teste2</option>
+                    <option *ngFor="let oGroup of groups; let i = index;" [ngValue]="oGroup.id">{{ oGroup.name }}</option>
                 </select>
             </div>
 
@@ -58,14 +57,13 @@
                 <select (click)="openSelect = !openSelect ? true : false;" formControlName="tel"></select>
                 <div class="option" *ngIf="openSelect">
                     <div class="option-detail" style="display: flex;">
-                        <input type="text" style="margin-top: 10px;" />
-                        <button class="btn-option">+</button>
+                        <input #inputPhoneNumbers type="text" style="margin-top: 10px;" />
+                        <button type="button" class="btn-option"
+                            (click)="addPhoneNumber(inputPhoneNumbers.value)">+</button>
                     </div>
-                    <div class="option-detail">19987070276 <span class="btn-trash"><i class="fas fa-trash"></i></span>
-                    </div>
-                    <div class="option-detail">19988990424 <span class="btn-trash"><i class="fas fa-trash"></i></span>
-                    </div>
-                    <div class="option-detail">19981626239 <span class="btn-trash"><i class="fas fa-trash"></i></span>
+                    <div class="option-detail" *ngFor="let oPhone of phoneNumbers"> {{ oPhone.tel }} <span
+                            (click)="removePhoneNumber(inputPhoneNumbers.value)" class="btn-trash"><i
+                                class="fas fa-trash"></i></span>
                     </div>
                 </div>
 
@@ -74,7 +72,7 @@
 
             <div class="form-footer">
                 <button class="btn-form btn-salvar">Salvar</button>
-                <button [routerLink]="'/consult-clients'" type="button" class="btn-form btn-voltar">Voltar</button>
+                <button routerLink="/consult-clients" type="button" class="btn-form btn-voltar">Voltar</button>
             </div>
 
         </form>

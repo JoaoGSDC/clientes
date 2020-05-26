@@ -3,8 +3,9 @@
 
         <div class="card-header">
             <h4>Consultar Grupos</h4>
-            <span [routerLink]="'/register-group'" class="new"><i class="fas fa-file fa-lg"></i></span>
-            <input type="text" id="inputSearch" class="input-header" (keyup)="searchGroup()" placeholder="Buscar grupo...">
+            <a routerLink="/register-group"><span class="new"><i class="fas fa-file fa-lg"></i></span></a>
+            <input type="text" id="inputSearch" class="input-header" (keyup)="searchGroup()"
+                placeholder="Buscar grupo...">
         </div>
 
         <table id="tableGroup">
@@ -17,30 +18,16 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Teste 1</td>
-                    <td>Ativo</td>
+                <tr *ngFor="let oGroup of groups; let i = index;">
+                    <td>{{ oGroup.name }}</td>
+                    <td>{{ oGroup.status === "1" ? 'Ativo' : 'Desabilitado' }}</td>
                     <td class="align-icons">
-                        <span [routerLink]="'/register-group'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
-                        <span (click)="openConfirm()"><i class="fas fa-trash"></i></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Test 2</td>
-                    <td>Ativo</td>
-                    <td class="align-icons">
-                        <span [routerLink]="'/register-group'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
-                        <span (click)="openConfirm()"><i class="fas fa-trash"></i></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Teste 3</td>
-                    <td>Ativo</td>
-                    <td class="align-icons">
-                        <span [routerLink]="'/register-group'" style="margin-right: 25px;"><i class="fas fa-pen"></i></span>
-                        <span (click)="openConfirm()"><i class="fas fa-trash"></i></span>
+                        <a routerLink="/register-group">
+                            <span (click)="storageGroup(oGroup)" style="margin-right: 25px;">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                        </a>
+                        <span (click)="openConfirm(oGroup)"><i class="fas fa-trash"></i></span>
                     </td>
                 </tr>
             </tbody>

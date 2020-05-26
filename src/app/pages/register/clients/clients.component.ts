@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import * as $ from 'jquery';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { ClientsService } from 'src/services/clients.service';
+import { Clients } from 'src/app/interfaces/clients';
+import { Phone } from 'src/app/interfaces/phone';
+import { Group } from 'src/app/interfaces/group';
+import { GroupsService } from 'src/services/groups.service';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-clients',
@@ -10,28 +15,72 @@ import * as $ from 'jquery';
 export class ClientsComponent implements OnInit {
 
   form!: FormGroup;
+  client!: Clients;
+  phoneNumbers: Phone[] = [];
+  groups!: Group[];
+  group!: Group;
 
-  inputDate!: string;
   openSelect = false;
 
   cpf = 'CPF';
   rg = 'RG';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private clientService: ClientsService,
+    private groupService: GroupsService
+  ) { }
 
   ngOnInit(): void {
-    this.setDate();
-
     this.builderForm();
+
+    this.setGroups();
+
+    if (localStorage.getItem('client')) {
+      this.client = JSON.parse(localStorage.getItem('client'));
+
+      this.groupService.getGroup(this.client.id_group).subscribe((group: Group) => {
+        this.group = group;
+        
+        this.setValue();
+      });
+
+      localStorage.clear();
+    } else {
+      this.form.controls['date'].setValue(this.setDate());
+    }    
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
-    this.salvar();
+    this.save();
   }
 
-  salvar(): void {
-    alert('Salvo com sucesso');
+  save(): void {
+    this.form.value.status = this.form.value.status === 'Ativo' ? "1" : "2";
+
+    if (this.client) {
+      this.client = this.form.value as Clients;
+      this.clientService.updateClient(this.client).subscribe(res => {
+        if (res) {
+          alert('Atualizado com sucesso!');
+        } else {
+          alert('Erro ao atualizar!');
+        }
+      });
+    } else {
+      this.client = this.form.value as Clients;
+      this.client.tel = this.phoneNumbers;
+      this.client.id_group = Number(this.client.group);
+
+      this.clientService.postClient(this.client).subscribe(res => {
+        if (res) {
+          this.form.reset();
+          alert('Salvo com sucesso!');
+        } else {
+          alert('Erro ao salvar!');
+        }
+      });
+    }
   }
 
   builderForm(): void {
@@ -47,14 +96,54 @@ export class ClientsComponent implements OnInit {
     });
   }
 
-  setDate(): void {
+  buildPhones(): FormArray {
+    const value = this.phoneNumbers.map(v => new FormControl(false));
+    return this.formBuilder.array(value);
+  }
+
+  setValue() {
+    this.form.setValue({
+      name: this.client.name,
+      type: this.client.type,
+      cpf: this.client.cpf,
+      rg: this.client.rg,
+      date: this.client.date,
+      group: null,
+      status: this.client.status,
+      tel: null
+    });
+  }
+
+  setGroups(): void {
+    this.groupService.getGroups().subscribe((groups: Group[]) => {
+      this.groups = groups;
+    });
+  }
+
+  addPhoneNumber(iPhoneNumber: string): void {
+    const phone: Phone = {
+      tel: iPhoneNumber,
+      cpf_client: this.form.value.cpf
+    }
+    this.phoneNumbers.push(phone);
+  }
+
+  removePhoneNumber(iPhoneNumber: string): void {
+    const phone: Phone = {
+      tel: iPhoneNumber,
+      cpf_client: this.form.value.cpf
+    }
+    this.phoneNumbers.splice(this.phoneNumbers.indexOf(phone), 1);
+  }
+
+  setDate(): string {
     const date = new Date();
 
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
 
-    this.inputDate = `${day}/${(month + 1)}/${year}`;
+    return `${day}/${(month + 1)}/${year}`;
   }
 
   typePerson(iType: any): void {

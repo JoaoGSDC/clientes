@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientsService } from 'src/services/clients.service';
+import { Clients } from 'src/app/interfaces/clients';
 
 @Component({
   selector: 'app-consult-clients',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultClientsComponent implements OnInit {
 
-  constructor() { }
+  clients!: Clients[];
+
+  constructor(private clientsService: ClientsService) { }
 
   ngOnInit(): void {
+    this.clientsService.getClients().subscribe((clients: Clients[]) => {
+      this.clients = clients;
+    });
   }
 
   searchClients(): void {
@@ -30,6 +37,24 @@ export class ConsultClientsComponent implements OnInit {
         }
       }
     }
+  }
+
+  openConfirm(iClient: Clients): void {
+    if (confirm('Deseja realmente excluir este cliente?')) {
+      this.deleteGroup(iClient);
+    }
+  }
+
+  storageGroup(iClient: Clients): void {
+    localStorage.setItem('client', JSON.stringify(iClient));
+  }
+
+  deleteGroup(iClient: Clients): void {
+    this.clientsService.delClient(iClient.cpf).subscribe(res => {
+      alert('Deletado com sucesso!');
+
+      this.clients.splice(this.clients.indexOf(iClient), 1);
+    });
   }
 
 }
