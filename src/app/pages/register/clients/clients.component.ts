@@ -18,7 +18,7 @@ export class ClientsComponent implements OnInit {
   client!: Clients;
   phoneNumbers: Phone[] = [];
   groups!: Group[];
-  group!: Group;
+  group: Group = {} as Group;
 
   openSelect = false;
 
@@ -38,6 +38,10 @@ export class ClientsComponent implements OnInit {
 
     if (localStorage.getItem('client')) {
       this.client = JSON.parse(localStorage.getItem('client'));
+      
+      this.clientService.getPhone(this.client.cpf).subscribe((phone: Phone[]) => {
+        this.phoneNumbers = phone;
+      });
 
       this.groupService.getGroup(this.client.id_group).subscribe((group: Group) => {
         this.group = group;
@@ -60,6 +64,7 @@ export class ClientsComponent implements OnInit {
 
     if (this.client) {
       this.client = this.form.value as Clients;
+      this.client.tel = this.phoneNumbers;
       this.clientService.updateClient(this.client).subscribe(res => {
         if (res) {
           alert('Atualizado com sucesso!');
@@ -69,17 +74,20 @@ export class ClientsComponent implements OnInit {
       });
     } else {
       this.client = this.form.value as Clients;
+      // this.client.tel = this.phoneNumbers;
       this.client.tel = this.phoneNumbers;
       this.client.id_group = Number(this.client.group);
 
       this.clientService.postClient(this.client).subscribe(res => {
         if (res) {
           this.form.reset();
+          this.phoneNumbers = [];
           alert('Salvo com sucesso!');
         } else {
           alert('Erro ao salvar!');
         }
       });
+      this.client = {} as Clients;
     }
   }
 
@@ -108,7 +116,7 @@ export class ClientsComponent implements OnInit {
       cpf: this.client.cpf,
       rg: this.client.rg,
       date: this.client.date,
-      group: null,
+      group: this.group,
       status: this.client.status,
       tel: null
     });

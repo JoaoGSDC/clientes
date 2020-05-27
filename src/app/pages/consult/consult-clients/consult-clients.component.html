@@ -16,10 +16,10 @@
                 </tr>
             </thead>
 
-            <tbody *ngFor="let oClient of clients; let i = index;">
-                <tr>
+            <tbody>
+                <tr *ngFor="let oClient of clients; let i = index;">
                     <td>{{ oClient.name }}</td>
-                    <td>{{ oClient.status }}</td>
+                    <td>{{ oClient.status === '1' ? 'Ativo' : 'Desabilitado' }}</td>
                     <td class="align-icons">
                         <a routerLink="/register-client">
                             <span (click)="storageGroup(oClient)" style="margin-right: 25px;">

@@ -38,8 +38,9 @@
             <div class="col-12 col-md-3">
                 <label>Grupo</label>
                 <select formControlName="group">
-                    <option hidden selected></option>
-                    <option *ngFor="let oGroup of groups; let i = index;" [ngValue]="oGroup.id">{{ oGroup.name }}</option>
+                    <option hidden selected>{{ group.name }}</option>
+                    <option *ngFor="let oGroup of groups; let i = index;" [ngValue]="oGroup.id">{{ oGroup.name }}
+                    </option>
                 </select>
             </div>
 
@@ -66,8 +67,6 @@
                                 class="fas fa-trash"></i></span>
                     </div>
                 </div>
-
-                <div class="modal"></div>
             </div>
 
             <div class="form-footer">
@@ -76,5 +75,6 @@
             </div>
 
         </form>
+        <div class="modal-select" *ngIf="openSelect" (click)="openSelect = false"></div>
     </div>
 </div>
